@@ -1,0 +1,85 @@
+.port-section {
+  padding: 120px 72px;
+  background: var(--navy);
+  position: relative; z-index: 1;
+}
+.port-header { margin-bottom: 56px; }
+
+.port-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+
+/* Card */
+.port-card {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden;
+  transition: var(--transition); cursor: pointer;
+}
+.port-card:hover {
+  border-color: rgba(30,111,245,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.port-card.featured { grid-row: 1 / 3; }
+
+/* Thumbnail */
+.port-thumb {
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.port-card.featured  .port-thumb { height: 300px; }
+.port-card:not(.featured) .port-thumb { height: 170px; }
+
+.grad-blue   { background: linear-gradient(135deg, #050c1a, #0d2255); }
+.grad-teal   { background: linear-gradient(135deg, #050c1a, #023030); }
+.grad-purple { background: linear-gradient(135deg, #050c1a, #150530); }
+
+.port-emoji {
+  font-size: 60px;
+  filter: drop-shadow(0 0 30px rgba(30,111,245,0.5));
+}
+
+/* Body */
+.port-body { padding: 28px; }
+.port-tag {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--blue2); margin-bottom: 10px;
+}
+.port-body h3 {
+  font-size: 18px; font-weight: 600;
+  color: var(--white); margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+.port-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* Tech badges */
+.port-techs {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+}
+.port-tech-badge {
+  font-size: 11px; font-weight: 600;
+  background: rgba(30,111,245,0.1);
+  border: 1px solid rgba(30,111,245,0.2);
+  color: var(--blue2);
+  padding: 3px 10px; border-radius: 99px;
+}
+
+/* Link */
+.port-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--cyan); font-size: 13px; font-weight: 600;
+  margin-top: 18px; transition: gap 0.2s;
+}
+.port-card:hover .port-link { gap: 10px; }
+
+@media (max-width: 900px) {
+  .port-section { padding: 70px 20px; }
+  .port-grid    { grid-template-columns: 1fr; }
+  .port-card.featured { grid-row: auto; }
+  .port-card.featured .port-thumb { height: 200px; }
+}

@@ -1,0 +1,123 @@
+/* ── CSS Variables ── */
+:root {
+  --navy:    #050c1a;
+  --navy2:   #081224;
+  --navy3:   #0c1a30;
+  --blue:    #1e6ff5;
+  --blue2:   #3a8aff;
+  --cyan:    #22d3ee;
+  --white:   #ffffff;
+  --text:    #e2e8f8;
+  --muted:   #6b82a8;
+  --border:  rgba(255,255,255,0.07);
+  --card:    rgba(255,255,255,0.03);
+  --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── Subtle mesh background ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(30,111,245,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(34,211,238,0.06) 0%, transparent 60%);
+}
+
+/* ── Global resets ── */
+a            { text-decoration: none; color: inherit; }
+button       { font-family: 'DM Sans', sans-serif; cursor: pointer; }
+img          { max-width: 100%; display: block; }
+ul           { list-style: none; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--navy); }
+::-webkit-scrollbar-thumb  { background: var(--blue); border-radius: 99px; }
+
+/* ── Shared button styles ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #fff; padding: 15px 34px; border-radius: 12px;
+  font-size: 15px; font-weight: 600; border: none;
+  box-shadow: 0 0 36px rgba(30,111,245,0.4);
+  transition: var(--transition);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 48px rgba(30,111,245,0.55); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text);
+  padding: 15px 34px; border-radius: 12px;
+  font-size: 15px; font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: var(--transition);
+}
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-3px); }
+
+/* ── Shared section eyebrow ── */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 16px;
+}
+.eyebrow::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 1.5px; background: var(--cyan);
+}
+
+/* ── Shared section title ── */
+.sec-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 400; line-height: 1.1;
+  letter-spacing: -0.5px; color: var(--white);
+  margin-bottom: 16px;
+}
+.sec-title em { font-style: italic; color: var(--cyan); }
+
+/* ── Shared section description ── */
+.sec-desc {
+  font-size: 16px; color: var(--muted);
+  line-height: 1.8; max-width: 520px;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal-left {
+  opacity: 0; transform: translateX(-32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-left.in  { opacity: 1; transform: none; }
+.reveal-right {
+  opacity: 0; transform: translateX(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-right.in { opacity: 1; transform: none; }

@@ -1,0 +1,37 @@
+.loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--navy);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 22px;
+  transition: opacity 0.7s ease;
+}
+.loader.fade-out { opacity: 0; pointer-events: none; }
+
+.ld-ring {
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 2.5px solid rgba(255,255,255,0.08);
+  border-top-color:  var(--blue);
+  border-right-color: var(--cyan);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ld-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--white); letter-spacing: 0.3px;
+}
+.ld-logo span { color: var(--cyan); }
+
+.ld-track {
+  width: 180px; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px; overflow: hidden;
+}
+.ld-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  border-radius: 99px;
+  transition: width 0.06s linear;
+}
+.ld-pct { font-size: 12px; color: var(--muted); letter-spacing: 1px; }

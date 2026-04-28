@@ -1,0 +1,174 @@
+/* ── Float button ── */
+.cb-btn {
+  position: fixed; bottom: 32px; right: 32px; z-index: 999;
+  width: 60px; height: 60px; border-radius: 50%; border: none;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow: 0 4px 32px rgba(30,111,245,0.5);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform 0.3s;
+  animation: cbGlow 2.5s ease infinite;
+}
+.cb-btn:hover { transform: scale(1.1); }
+.cb-btn svg   { width: 26px; height: 26px; }
+@keyframes cbGlow {
+  0%,100% { box-shadow: 0 4px 32px rgba(30,111,245,0.5); }
+  50%      { box-shadow: 0 4px 48px rgba(34,211,238,0.65); }
+}
+
+/* Badge */
+.cb-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #f0b429; color: #000;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--navy);
+}
+
+/* ── Chat window ── */
+.cb-window {
+  position: fixed; bottom: 108px; right: 32px; z-index: 998;
+  width: 380px; height: 560px;
+  background: var(--navy2);
+  border: 1px solid rgba(30,111,245,0.25);
+  border-radius: 24px;
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+  transform: scale(0.88) translateY(20px);
+  opacity: 0; pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  transform-origin: bottom right;
+}
+.cb-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1; pointer-events: all;
+}
+
+/* Header */
+.cb-head {
+  background: linear-gradient(135deg, var(--blue), rgba(34,211,238,0.85));
+  padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+}
+.cb-avatar {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.cb-head-info { flex: 1; }
+.cb-head-info strong { display: block; font-size: 15px; font-weight: 700; color: #fff; }
+.cb-head-info span   { font-size: 12px; color: rgba(255,255,255,0.75); }
+.cb-online {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80; margin-right: 5px;
+  box-shadow: 0 0 6px #4ade80;
+  animation: cbGlow 1.5s ease infinite;
+}
+.cb-close {
+  width: 30px; height: 30px; border-radius: 8px; border: none;
+  background: rgba(255,255,255,0.15); color: #fff;
+  font-size: 14px; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.cb-close:hover { background: rgba(255,255,255,0.28); }
+
+/* Messages area */
+.cb-msgs {
+  flex: 1; overflow-y: auto; padding: 18px;
+  display: flex; flex-direction: column; gap: 14px;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.cb-msgs::-webkit-scrollbar       { width: 4px; }
+.cb-msgs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+
+/* Message rows */
+.cb-msg { display: flex; gap: 10px; align-items: flex-end; animation: msgIn 0.3s ease; }
+@keyframes msgIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.cb-msg.user { flex-direction: row-reverse; }
+.cb-av {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.cb-msg.user .cb-av { background: rgba(255,255,255,0.1); }
+
+/* Bubbles */
+.cb-bubble {
+  max-width: 78%; padding: 11px 15px; border-radius: 16px;
+  font-size: 13.5px; line-height: 1.55;
+}
+.cb-msg.bot  .cb-bubble {
+  background: rgba(255,255,255,0.06); color: var(--text);
+  border: 1px solid var(--border); border-bottom-left-radius: 4px;
+}
+.cb-msg.user .cb-bubble {
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.cb-time { font-size: 10px; color: var(--muted); margin-top: 4px; text-align: right; }
+
+/* Typing dots */
+.cb-bubble.typing {
+  display: flex; align-items: center; gap: 5px;
+  padding: 14px 18px; min-width: 58px;
+}
+.cb-bubble.typing span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted); display: inline-block;
+  animation: dot 1.2s ease infinite;
+}
+.cb-bubble.typing span:nth-child(2) { animation-delay: 0.2s; }
+.cb-bubble.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot {
+  0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* Quick replies */
+.cb-quick {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 4px 16px 12px; flex-shrink: 0;
+}
+.cb-qb {
+  background: rgba(30,111,245,0.1);
+  border: 1px solid rgba(30,111,245,0.28);
+  color: var(--cyan); padding: 7px 14px; border-radius: 99px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.cb-qb:hover { background: rgba(30,111,245,0.22); border-color: var(--blue); }
+
+/* Input */
+.cb-input-wrap {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: var(--navy3);
+}
+.cb-input {
+  flex: 1; background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 14px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 13.5px;
+  outline: none; transition: border-color 0.2s;
+}
+.cb-input:focus { border-color: rgba(30,111,245,0.45); }
+.cb-input::placeholder { color: var(--muted); }
+.cb-send {
+  width: 38px; height: 38px; border-radius: 10px; border: none;
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s;
+}
+.cb-send:hover { transform: scale(1.08); box-shadow: 0 0 16px rgba(30,111,245,0.5); }
+.cb-send svg  { width: 16px; height: 16px; }
+
+@media (max-width: 600px) {
+  .cb-window { width: calc(100vw - 24px); right: 12px; bottom: 88px; height: 500px; }
+  .cb-btn    { bottom: 20px; right: 20px; }
+}
