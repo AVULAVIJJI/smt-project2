@@ -49,7 +49,7 @@ function PortalBanner() {
         >
           <div className="pb-icon">🎓</div>
           <div>
-            <div className="pb-name">Soft Master Institute/Other Jobs </div>
+            <div className="pb-name">Soft Master Institute</div>
             <div className="pb-sub">Institute · Courses &amp; Placements</div>
           </div>
           <div className="pb-arrow">→</div>
