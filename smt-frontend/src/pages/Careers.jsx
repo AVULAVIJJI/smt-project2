@@ -19,6 +19,47 @@ const STATIC_JOBS = [
 const DEPTS = ['All','Engineering','Mobile','Design','Cloud','AI','Sales']
 const TYPES = ['All','Full-Time','Internship']
 
+/* ── Dual Portal Banner ─────────────────────────────────────── */
+function PortalBanner() {
+  const [visible, setVisible] = useState(true)
+  if (!visible) return null
+  return (
+    <div className="portal-banner">
+      <button className="portal-banner-close" onClick={() => setVisible(false)}>✕</button>
+      <p className="portal-banner-title">🌐 Also Explore Opportunities At</p>
+      <div className="portal-banner-cards">
+        <a
+          href="https://portal.softmastertech.com/careers"
+          target="_blank"
+          rel="noreferrer"
+          className="portal-banner-card company"
+        >
+          <div className="pb-icon">🏢</div>
+          <div>
+            <div className="pb-name">Soft Master Technology</div>
+            <div className="pb-sub">Company · Full-Time &amp; Internship Roles</div>
+          </div>
+          <div className="pb-arrow">→</div>
+        </a>
+        <a
+          href="https://softmastertech.com/careers"
+          target="_blank"
+          rel="noreferrer"
+          className="portal-banner-card institute"
+        >
+          <div className="pb-icon">🎓</div>
+          <div>
+            <div className="pb-name">Soft Master Institute/Other Jobs </div>
+            <div className="pb-sub">Institute · Courses &amp; Placements</div>
+          </div>
+          <div className="pb-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  )
+}
+
+/* ── Apply Modal ────────────────────────────────────────────── */
 function ApplyModal({ job, onClose }) {
   const [form, setForm]        = useState({ name:'', email:'', phone:'', role:job.title, experience:'', portfolio:'', message:'' })
   const [submitted, setSubmit] = useState(false)
@@ -84,6 +125,7 @@ function ApplyModal({ job, onClose }) {
   )
 }
 
+/* ── Main Page ──────────────────────────────────────────────── */
 export default function Careers() {
   const [dept,      setDept]   = useState('All')
   const [type,      setType]   = useState('All')
@@ -110,6 +152,10 @@ export default function Careers() {
   return (
     <>
       <Navbar />
+
+      {/* ── Dual Portal Banner ── */}
+      <PortalBanner />
+
       <div className="careers-page">
         <div className="careers-hero">
           <div className="careers-hero-inner">

@@ -226,3 +226,96 @@
   transform: translateX(-3px);
   color: #fff;
 }
+
+
+.portal-banner {
+  position: relative;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-bottom: 2px solid #334155;
+  padding: 20px 24px 24px;
+  text-align: center;
+  margin-top: 70px; /* navbar height — change this to match your navbar's actual height */
+  z-index: 1;
+}
+
+.portal-banner-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+.portal-banner-close:hover { color: #fff; }
+
+.portal-banner-title {
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.portal-banner-cards {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.portal-banner-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  min-width: 280px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid transparent;
+}
+.portal-banner-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.portal-banner-card.company {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  border-color: #3b82f6;
+}
+.portal-banner-card.institute {
+  background: linear-gradient(135deg, #065f46, #059669);
+  border-color: #10b981;
+}
+
+.pb-icon { font-size: 26px; flex-shrink: 0; }
+
+.pb-name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.pb-sub {
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  text-align: left;
+  margin-top: 3px;
+}
+
+.pb-arrow {
+  color: #fff;
+  font-size: 20px;
+  margin-left: auto;
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .portal-banner { margin-top: 60px; padding: 16px; }
+  .portal-banner-card { min-width: 100%; }
+}
