@@ -45,7 +45,7 @@ export default function EmployeeAttendance() {
   }
 
   // ── Build calendar days ──────────────────────────────────────
-  const firstDay  = new Date(year, month, 1).getDay()   // 0=Sun
+  const firstDay    = new Date(year, month, 1).getDay()   // 0=Sun
   const daysInMonth = new Date(year, month + 1, 0).getDate()
 
   // Map date string → status from attendance records
@@ -86,10 +86,11 @@ export default function EmployeeAttendance() {
   const prevMonth = () => { if (month === 0) { setMonth(11); setYear(y => y-1) } else setMonth(m => m-1) }
   const nextMonth = () => { if (month === 11) { setMonth(0); setYear(y => y+1) } else setMonth(m => m+1) }
 
-  // Stats
-  const present  = records.filter(r => r.status === 'present').length
-  const absent   = records.filter(r => r.status === 'absent').length
-  const onLeave  = Object.keys(leaveMap).filter(d => d.startsWith(`${year}-${String(month+1).padStart(2,'0')}`)).length
+  // ── Stats: filter to CURRENT selected month only ──────────────
+  const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`
+  const present  = records.filter(r => r.status === 'present' && r.date?.startsWith(monthPrefix)).length
+  const absent   = records.filter(r => r.status === 'absent'  && r.date?.startsWith(monthPrefix)).length
+  const onLeave  = Object.keys(leaveMap).filter(d => d.startsWith(monthPrefix)).length
 
   const STATUS_STYLE = {
     present: { bg: '#dcfce7', color: '#16a34a', label: 'Present' },
@@ -143,12 +144,12 @@ export default function EmployeeAttendance() {
         {msg && <div className="emp-success-banner" style={{marginTop:'10px'}}>{msg}</div>}
       </div>
 
-      {/* Stats */}
+      {/* Stats — filtered to selected month */}
       <div className="emp-stats-row">
         {[
-          { label:'Present',       value: present,  icon:'✅', color:'#16a34a' },
-          { label:'Absent',        value: absent,   icon:'❌', color:'#dc2626' },
-          { label:'On Leave',      value: onLeave,  icon:'🌴', color:'#ca8a04' },
+          { label:'Present',       value: present,          icon:'✅', color:'#16a34a' },
+          { label:'Absent',        value: absent,           icon:'❌', color:'#dc2626' },
+          { label:'On Leave',      value: onLeave,          icon:'🌴', color:'#ca8a04' },
           { label:'Total Working', value: present + absent, icon:'📊', color:'#2563eb' },
         ].map(s => (
           <div className="emp-stat-card" key={s.label}>
@@ -161,7 +162,6 @@ export default function EmployeeAttendance() {
 
       {/* Calendar */}
       <div className="emp-section">
-        {/* Calendar header */}
         <div className="att-cal-header">
           <button className="att-nav-btn" onClick={prevMonth}>‹ Prev</button>
           <h2 style={{margin:0}}>{MONTHS[month]} {year}</h2>
@@ -180,17 +180,14 @@ export default function EmployeeAttendance() {
 
         {/* Calendar grid */}
         <div className="att-calendar">
-          {/* Day headers */}
           {DAYS.map(d => (
             <div key={d} className="att-day-header">{d}</div>
           ))}
 
-          {/* Empty cells before first day */}
           {Array.from({ length: firstDay }).map((_, i) => (
             <div key={`empty-${i}`} className="att-day-cell empty" />
           ))}
 
-          {/* Day cells */}
           {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(dayNum => {
             const status = getDayStatus(dayNum)
             const info   = getDayInfo(dayNum)

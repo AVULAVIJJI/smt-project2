@@ -8,7 +8,12 @@ from middleware.auth import require_admin, require_employee
 
 router = APIRouter()
 
-LEAVE_BALANCE = {"Annual Leave": 12, "Sick Leave": 6, "Casual Leave": 6}
+LEAVE_BALANCE = {
+    "Annual Leave":    12,
+    "Sick Leave":       6,
+    "Casual Leave":     6,
+    "Work From Home":  12,   # ← added
+}
 
 
 class LeaveIn(BaseModel):

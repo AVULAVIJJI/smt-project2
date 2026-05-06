@@ -21,6 +21,7 @@ export default function Dashboard() {
     { label: 'Open Jobs',         value: stats.openJobs,         icon: '📋', color: 'cyan'   },
     { label: 'New Applications',  value: stats.newApplications,  icon: '📩', color: 'amber'  },
     { label: 'Contact Enquiries', value: stats.totalContacts,    icon: '✉️', color: 'purple' },
+    { label: 'Pending Leaves',    value: stats.pendingLeaves,    icon: '🌴', color: 'green'  },
   ]
 
   return (
@@ -66,6 +67,7 @@ export default function Dashboard() {
           <Link to="/admin/jobs"         className="qa-card">📋 Post a New Job</Link>
           <Link to="/admin/applications" className="qa-card">📩 Review Applications</Link>
           <Link to="/admin/employees"    className="qa-card">👥 Add Employee</Link>
+          <Link to="/admin/leaves"       className="qa-card">🌴 Review Leaves</Link>
           <a href="/careers" target="_blank" rel="noreferrer" className="qa-card">🔗 View Careers Page</a>
         </div>
       </div>
